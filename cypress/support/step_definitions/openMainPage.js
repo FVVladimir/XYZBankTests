@@ -1,4 +1,7 @@
 import { Given, Then, And } from "cypress-cucumber-preprocessor/steps";
+import { addDeposit } from "../actions/addDeposit.js";
+import { buttonClick } from '../actions/buttonClick.js';
+import { choseUser } from "../actions/choseUser.js";
 
 
 
@@ -6,20 +9,16 @@ Given('User open main page', () => {
     cy.visit('https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login')
 })
 
-Then('Click button Customer Login', () => {
-    cy.contains('Customer Login').click()
-    // cy.get('button').first().click()
+Then('Click button Customer Login', () => {   
+       buttonClick();
 })
 
-And('Select user name', () => {
-    cy.get('select').select('Ron Weasly').type('{enter}')
+And('Select user name', () => {    
+    choseUser();
 })
 
-And('Press button deposit', () => {
-    cy.contains('Deposit').click()
-    cy.get('input').should('have.attr', 'placeholder', 'amount').type('1000')
-    cy.get('.btn-default').click()
-    cy.get('span.error').should('be.visible')
+And('Press button deposit', () => {   
+    addDeposit();
 })
 
 And('Check transaction', () => {
